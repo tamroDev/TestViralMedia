@@ -78,14 +78,23 @@ const App = () => {
         <div className="grid grid-cols-2 gap-4 w-3/4 mx-auto mb-6">
           {arr.map(choice => (
             <button
-              disabled={!status}
+              disabled={
+                !status || (myChoice.length >= 2 && !myChoice.includes(choice))
+              }
               key={choice}
               onClick={() => handleChoice(choice)}
-              className={`p-4 text-lg font-bold rounded-lg transition-all border-2 ${
-                myChoice.includes(choice)
-                  ? 'bg-blue-500 text-white border-blue-500'
-                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'
-              }`}
+              className={`cursor-pointer p-4 text-lg font-bold rounded-lg transition-all shadow-md 
+                ${
+                  myChoice.includes(choice)
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                } 
+                ${
+                  !status ||
+                  (myChoice.length >= 2 && !myChoice.includes(choice))
+                    ? 'cursor-not-allowed opacity-50'
+                    : ''
+                }`}
             >
               {choice}
             </button>
